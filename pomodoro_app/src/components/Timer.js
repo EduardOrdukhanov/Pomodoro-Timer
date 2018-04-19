@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import moment from "moment";
 import timer from "moment-timer";
+import alarm from "../assets/telephone-ring-01a.mp3";
 
 class Timer extends Component {
   constructor(props){
@@ -29,6 +30,7 @@ class Timer extends Component {
 
   componentDidMount(){
     this.timer = setInterval(this.doSomething, 100);
+    this.sound = new Audio(alarm);
   }
 
   handleStart(e){
@@ -58,6 +60,7 @@ class Timer extends Component {
       this.setState({display: `${minutes}:${seconds}`});
       
       if(minutes === "00" && seconds === "00"){
+        this.sound.play();
         var newMoment = this.nextState();
         if(newMoment !== null){
           this.setState({
@@ -70,19 +73,19 @@ class Timer extends Component {
 
   setBusy(){
     let newMoment = moment();
-    newMoment.add(30, "seconds");
+    newMoment.add(25, "minutes");
     this.setState({state: "Busy", count: this.state.count + 1});
     return newMoment;
   }
   setShortBreak(){
     let newMoment = moment();
-    newMoment.add(5, "seconds");
+    newMoment.add(5, "minutes");
     this.setState({state: "Short break"});
     return newMoment;
   }
   setLongBreak(){
     let newMoment = moment();
-    newMoment.add(15, "seconds");
+    newMoment.add(15, "minutes");
     this.setState({state: "Long break"});
     return newMoment;
   }
@@ -131,9 +134,9 @@ class Timer extends Component {
               <p className="title has-text-centered is-size-1">
                 {this.state.display}
               </p>
-              <p className="subtitle has-text-centered">
+              <p className="subtitle has-text-centered is-size-3">
                 State: 
-                <span className={`subtitle has-text-centered ${this.getTextColor()}`}>
+                <span className={`subtitle has-text-centered ${this.getTextColor()} is-size-3`}>
                   {" "}{this.state.state}
                 </span>
                 <br/>Pomodoro #{this.state.count}
