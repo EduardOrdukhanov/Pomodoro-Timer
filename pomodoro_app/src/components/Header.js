@@ -6,7 +6,7 @@ class Header extends Component{
     return (
       <nav className='navbar is-primary'>
         <div className="navbar-brand">
-          <div className="navbar-item">
+          <div className="navbar-item is-size-3">
             <img src={logo}/>
             Pomodoro timer
           </div>

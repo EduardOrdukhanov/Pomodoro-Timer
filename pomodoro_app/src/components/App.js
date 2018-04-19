@@ -8,7 +8,15 @@ class App extends Component {
       <div className="App">
         <Header/>
         <Timer/>
-        Created by Eduard Ordukhanov
+        <footer class="footer">
+          <div class="container">
+            <div class="content has-text-centered">
+              <p>
+                Developed by <strong>Eduard Ordukhanov</strong>
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
     );
   }
