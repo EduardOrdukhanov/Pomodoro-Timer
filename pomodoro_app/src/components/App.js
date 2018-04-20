@@ -8,9 +8,9 @@ class App extends Component {
       <div className="App">
         <Header/>
         <Timer/>
-        <footer class="footer">
-          <div class="container">
-            <div class="content has-text-centered">
+        <footer className="footer">
+          <div className="container">
+            <div className="content has-text-centered">
               <p>
                 Developed by <strong>Eduard Ordukhanov</strong>
               </p>

@@ -1,12 +1,11 @@
 import React, {Component} from "react";
 import moment from "moment";
-import timer from "moment-timer";
 import alarm from "../assets/telephone-ring-01a.mp3";
 
 class Timer extends Component {
   constructor(props){
     super(props);
-    this.doSomething = this.doSomething.bind(this);
+    this.updateDisplay = this.updateDisplay.bind(this);
     this.state = {
       moment_time: null,
       count: 0,
@@ -29,7 +28,7 @@ class Timer extends Component {
 
 
   componentDidMount(){
-    this.timer = setInterval(this.doSomething, 100);
+    this.timer = setInterval(this.updateDisplay, 100);
     this.sound = new Audio(alarm);
   }
 
@@ -45,9 +44,8 @@ class Timer extends Component {
     }
   }
 
-  doSomething(){
+  updateDisplay(){
     if(this.state !== undefined && this.state.moment_time !== null){
-      let current = moment();
       let difference = this.state.moment_time.diff(moment(), "seconds");
       let minutes = Math.floor(difference / 60) + "";
       let seconds = difference % 60 + "";
@@ -85,7 +83,7 @@ class Timer extends Component {
   }
   setLongBreak(){
     let newMoment = moment();
-    newMoment.add(15, "minutes");
+    newMoment.add(30, "minutes");
     this.setState({state: "Long break"});
     return newMoment;
   }
@@ -94,32 +92,29 @@ class Timer extends Component {
     switch(this.state.state){
       case "Idle":
         return "has-text-warning";
-        break;
       case "Busy":
         return "has-text-danger";
-        break;
       default:
         return "has-text-success";
-        break;
     }
   }
 
   nextState(){
     var newMoment = null;
     if(this.state.state === "Idle"){
-      console.log(`Idle -> Busy`);
+      //console.log(`Idle -> Busy`);
       newMoment = this.setBusy();
     }else if(this.state.state === "Busy" && this.state.count < 4){
-      console.log(`Busy -> Short break`);
+      //console.log(`Busy -> Short break`);
       newMoment = this.setShortBreak();
     }else if(this.state.state === "Busy" && this.state.count === 4){
-      console.log(`Busy -> Long break`);
+      //console.log(`Busy -> Long break`);
       newMoment = this.setLongBreak();
     }else if(this.state.state === "Short break"){
-      console.log(`Short Break -> Busy`);
+      //console.log(`Short Break -> Busy`);
       newMoment = this.setBusy();
     }else{
-      console.log(`${this.state.state} -> unkown, ${this.state.count}`);
+      //console.log(`${this.state.state} -> unkown, ${this.state.count}`);
       this.resetPomodoro();
     }
     return newMoment;
