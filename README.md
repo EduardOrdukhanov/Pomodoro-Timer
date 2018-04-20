@@ -2,13 +2,13 @@
 
 A Pomodoro Timer that can be utilized for efficient use of time
 
-### Prerequisites
+## Prerequisites
 
 Prior to running the app, the user needs to have the following installed on their machines
 1. [Node.js && npm](https://nodejs.org/en/download/)
 2. [create-react-app](https://github.com/facebook/create-react-app)
 
-### Installing
+## Installing
 
 The following is a set of directions for how to get a react development server running locally to run the app
 
